@@ -36,10 +36,10 @@ app.post('/addmovie', async (req,res) => {
     const {movie_name, movie_year, movie_pic} = req.body;
     try {
         let connection = await mysql.createConnection(dbConfig);
-        await connection.execute('INSERT INTO movies (movie_name, movie_year, movie_pic) VALUES (?, ?)', [movie_name, movie_year, movie_pic]);
-        res.status(201).json({message: 'Card ' + movie_name +' added successfully'});
+        await connection.execute('INSERT INTO movies (movie_name, movie_year, movie_pic) VALUES (?, ?, ?)', [movie_name, movie_year, movie_pic]);
+        res.status(201).json({message: 'Movie ' + movie_name +' added successfully'});
     } catch (err) {
         console.error(err);
-        res.status(500).json({message: 'Server error - could not add card ' + movie_name});
+        res.status(500).json({message: 'Server error - could not add movie ' + movie_name});
     }
 });
