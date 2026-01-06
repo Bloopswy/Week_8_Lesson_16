@@ -1,7 +1,7 @@
 const express = require('express');
 const mysql = require('mysql2/promise');
 require('dotenv').config();
-const port = 3000;
+const port = 3001;
 
 const dbConfig = {
     host: process.env.DB_HOST,
