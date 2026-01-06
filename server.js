@@ -43,3 +43,15 @@ app.post('/addmovie', async (req,res) => {
         res.status(500).json({message: 'Server error - could not add movie ' + movie_name});
     }
 });
+
+app.post('/deletemovie', async (req,res) => {
+    const {id, movie_name} = req.body;
+    try {
+        let connection = await mysql.createConnection(dbConfig);
+        await connection.execute('DELETE FROM movies WHERE id = ?',[id]);
+        res.json({message: 'Movie '+ movie_name+ ' deleted successfully'});
+    }catch(err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error - could not delete movie ' + movie_name});
+    }
+});
