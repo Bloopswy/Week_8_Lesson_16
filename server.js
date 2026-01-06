@@ -49,9 +49,21 @@ app.post('/deletemovie', async (req,res) => {
     try {
         let connection = await mysql.createConnection(dbConfig);
         await connection.execute('DELETE FROM movies WHERE id = ?',[id]);
-        res.json({message: 'Movie '+ movie_name+ ' deleted successfully'});
+        res.json({message: 'Movie deleted successfully'});
     }catch(err) {
         console.error(err);
-        res.status(500).json({ message: 'Server error - could not delete movie ' + movie_name});
+        res.status(500).json({ message: 'Server error - could not delete movie '});
+    }
+});
+
+app.post('/updatemovie', async (req,res) => {
+    const {movie_name, movie_year, movie_pic, id} = req.body;
+    try {
+        let connection = await mysql.createConnection(dbConfig);
+        await connection.execute('UPDATE movies SET movie_name = ?, movie_year = ?, movie_pic = ? WHERE id = ?',[movie_name, movie_year, movie_pic, id]);
+        res.status(201).json({message: 'Movie '+movie_name+ ' updated successfully'});
+    }catch(err) {
+        console.error(err);
+        res.status(500).json({message: 'Server error - could not update movie '+movie_name});
     }
 });
