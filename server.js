@@ -44,11 +44,11 @@ app.post('/addmovie', async (req,res) => {
     }
 });
 
-app.post('/deletemovie', async (req,res) => {
+app.delete('/deletemovie/:id', async (req,res) => {
     const {id} = req.body;
     try {
         let connection = await mysql.createConnection(dbConfig);
-        await connection.execute('DELETE FROM movies WHERE id = ?',[id]);
+        await connection.execute('DELETE FROM movies WHERE id ='+ [id]);
         res.json({message: 'Movie deleted successfully'});
     }catch(err) {
         console.error(err);
@@ -56,7 +56,7 @@ app.post('/deletemovie', async (req,res) => {
     }
 });
 
-app.post('/updatemovie', async (req,res) => {
+app.put('/updatemovie', async (req,res) => {
     const {movie_name, movie_year, movie_pic, id} = req.body;
     try {
         let connection = await mysql.createConnection(dbConfig);
