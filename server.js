@@ -56,7 +56,7 @@ app.delete('/deletemovie/:id', async (req,res) => {
     }
 });
 
-app.put('/updatemovie', async (req,res) => {
+app.put('/updatemovie/:id', async (req,res) => {
     const {id} =req.params;
     const {movie_name, movie_year, movie_pic} = req.body;
     try {
