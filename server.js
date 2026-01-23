@@ -48,7 +48,7 @@ app.delete('/deletemovie/:id', async (req,res) => {
     const {id} = req.params;
     try {
         let connection = await mysql.createConnection(dbConfig);
-        await connection.execute('DELETE FROM movies WHERE id ='+ id);
+        await connection.execute('DELETE FROM movies WHERE id ='+ [id]);
         res.json({message: 'Movie deleted successfully'});
     }catch(err) {
         console.error(err);
