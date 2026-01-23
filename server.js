@@ -58,7 +58,7 @@ app.delete('/deletemovie/:id', async (req,res) => {
 
 app.put('/updatemovie', async (req,res) => {
     const {id} =req.params;
-    const {movie_name, movie_year, movie_pic, id} = req.body;
+    const {movie_name, movie_year, movie_pic} = req.body;
     try {
         let connection = await mysql.createConnection(dbConfig);
         await connection.execute('UPDATE movies SET movie_name = ?, movie_year = ?, movie_pic = ? WHERE id = ?',[movie_name, movie_year, movie_pic, id]);
